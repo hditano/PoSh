@@ -45,7 +45,10 @@ function GetWeb {
     $Response = Invoke-WebRequest -Uri 'https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html'
     $html = ConvertFrom-Html $Response
     $p = $html.SelectNodes('//p') | Where-Object { $_.HasClass('price_color')}
-    Write-Output $p
+    $myObject = [PSCustomObject]@{
+        Price = $p.innerText.Trim("?", " ")
+    }
+    Write-Host $myObject
 
 
 }
