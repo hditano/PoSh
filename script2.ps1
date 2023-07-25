@@ -1,4 +1,4 @@
-Write-Host 'Hello World'
+Import-module -Name myModule
 
 class Person {
     [String] $FirstName
@@ -53,7 +53,16 @@ function GetWeb {
 
 }
 
+function GetAll {
+    if(Get-Module -ListAvailable | Where-Object { $_.Name -eq 'PowerHTML'}) {
+        Write-Host 'Its available'
+    }
+}
+
+myModule\GetName
+
 #$myPerson = [Person]::new('Hernan', 'Di Tano', 23)
 #$myPerson.GetName()
 #$myPerson.GetData()
 GetWeb
+GetAll
